@@ -1,24 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
 
 function App() {
+  const [starships, setStarships] = useState([{name: "Millenium Falcon", id: 1}, {name: "Executor", id: 2}, {name: "Sentinel-class landing craft", id: 3},]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>SW Shipping</h1>
+      <h2>Our Fleet</h2>
+      <ul>
+      {starships.map(starship => (<li key={starship.id}>{starship.name}</li>))}
+      </ul>
     </div>
   );
 }
