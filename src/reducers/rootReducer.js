@@ -2,7 +2,10 @@
 const initState = {
   loading: false,
   starships: [],
-  starshipsNextPage: 'https://swapi.co/api/starships/?page=1',
+  starshipsNextPage: "https://swapi.co/api/starships/?page=1",
+  characters: [],
+  characterCount: null,
+  characterIds: []
 };
 
 const rootReducer = (state = initState, action) => {
@@ -19,9 +22,28 @@ const rootReducer = (state = initState, action) => {
     case "FETCH_STARSHIPS_ERROR":
       console.log("Fetching Starships was unsuccessful.", action.err);
       return state;
-    case 'UPDATE_STARSHIP_PAGE':
+    case "UPDATE_STARSHIP_PAGE":
       console.log("Updated next Starships page.", action.next);
       return { ...state, starshipsNextPage: action.next };
+    case "FETCH_CHARACTER_COUNT":
+      console.log("Finished fetching character count.", action.count);
+      return { ...state, characterCount: action.count };
+    case "FETCH_CHARACTER_COUNT_ERROR":
+      console.log("Fetching character count was unsuccessful.", action.count);
+      return state;
+    case "FETCH_CHARACTER":
+      console.log("Finished fetching character.", action.character);
+      return {
+        ...state,
+        characters: [...state.characters, action.character],
+        characterIds: [
+          ...state.characterIds,
+          parseInt(action.character.url.split("/")[5])
+        ]
+      };
+    case "FETCH_CHARACTER_ERROR":
+      console.log("Fetching character was unsuccessful.", action.err);
+      return state;
     default:
       return state;
   }
