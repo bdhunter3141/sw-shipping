@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* List Styling */
+
+.starship-list-item,
+.character-list-item {
+  margin: 20px;
+}
+
+.character-list-item {
+  font-weight: bold;
+}

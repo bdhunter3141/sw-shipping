@@ -11,11 +11,15 @@ const App = () => {
   const loading = useSelector(state => state.loading);
   const starshipsNextPage = useSelector(state => state.starshipsNextPage);
   const characterCount = useSelector(state => state.characterCount);
+  const characters = useSelector(state => state.characters);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!characterCount) {
       dispatch(fetchCharacterCountAction());
+    }
+    if (characters.length / starships.length <= 0.2) {
+      dispatch(fetchCharacterAction());
     }
   });
 
@@ -23,9 +27,21 @@ const App = () => {
     <div className="App">
       <h1>SW Shipping</h1>
       <h2>Our Fleet</h2>
-      <ul>
+      <div>
         {starships.length ? (
-          starships.map(starship => <li key={starship.id}>{starship.name}</li>)
+          starships.map((starship, i) => {
+            if (i % 8 === 0 && i !== 0) {
+              let characterInfo = characters[i / 8 - 1] || "";
+              return (
+                <div key={starship.id}>
+                  <div className='character-list-item'>{characterInfo.name}</div>
+                  <div className='starship-list-item'>{starship.name}</div>
+                </div>
+              );
+            } else {
+              return <div key={starship.id} className='starship-list-item'>{starship.name}</div>;
+            }
+          })
         ) : (
           <p>&nbsp;</p>
         )}
@@ -36,7 +52,6 @@ const App = () => {
           <button
             onClick={() => {
               dispatch(fetchStarshipsAction());
-              dispatch(fetchCharacterAction());
             }}
           >
             Fetch
@@ -44,7 +59,7 @@ const App = () => {
         ) : (
           <p>No More Starships</p>
         )}
-      </ul>
+      </div>
     </div>
   );
 };
