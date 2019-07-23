@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchStarshipsAction,
@@ -40,25 +41,24 @@ const List = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [dispatch, starshipsNextPage]);
 
-
-
   return (
     <div id="list-container">
       <h2>Our Fleet</h2>
       {starships.length ? (
         starships.map((starship, i) => {
+          const starshipId = starship.url.split('/')[5];
           if (i % 8 === 0 && i !== 0) {
             let characterInfo = characters[i / 8 - 1] || "";
             return (
               <div key={starship.id}>
-                <div className="character-list-item">{characterInfo.name}</div>
-                <div className="starship-list-item">{starship.name}</div>
+                <div className="character-list-item">Meet {characterInfo.name}, one of our pilots! Born in {characterInfo.birth_year}, they are {characterInfo.height} cm tall and weigh {characterInfo.mass} kg.</div>
+                <div className="starship-list-item"><div><Link to={`/starships/${starshipId}`}>{starship.name}</Link></div><div>{starship.model} | {starship.manufacturer}</div></div>
               </div>
             );
           } else {
             return (
               <div key={starship.id} className="starship-list-item">
-                {starship.name}
+                <div><Link to={`/starships/${starshipId}`}>{starship.name}</Link></div> <div>{starship.model} | {starship.manufacturer}</div>
               </div>
             );
           }

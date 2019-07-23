@@ -6,6 +6,7 @@ const initState = {
   characters: [],
   characterCount: null,
   lastCharacterId: 0,
+  currentStarship: {}
 };
 
 const rootReducer = (state = initState, action) => {
@@ -13,6 +14,10 @@ const rootReducer = (state = initState, action) => {
     case "FETCH_STARSHIPS":
       return { ...state, starships: [...state.starships, ...action.starships] };
     case "FETCH_STARSHIPS_ERROR":
+      return state;
+    case "FETCH_STARSHIP":
+      return { ...state, currentStarship: action.starship };
+    case "FETCH_STARSHIP_ERROR":
       return state;
     case "LOADING":
       return {...state, loading: true};
