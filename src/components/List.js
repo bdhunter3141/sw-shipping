@@ -2,47 +2,45 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchStarshipsAction,
-  fetchCharacterCountAction,
   fetchCharacterAction
 } from "../actions/dataActions";
 
 const List = () => {
   const starships = useSelector(state => state.starships);
   const starshipsNextPage = useSelector(state => state.starshipsNextPage);
-  const characterCount = useSelector(state => state.characterCount);
   const characters = useSelector(state => state.characters);
+  const loading = useSelector(state => state.loading);
   const dispatch = useDispatch();
-  const [loadMore, setLoadMore] = useState(false);
+  const [characterId, setCharacterId] = useState(0);
 
   useEffect(() => {
-    if (!characterCount) {
-      dispatch(fetchCharacterCountAction());
+    if (starships.length && characters.length / starships.length <= 0.2) {
+      dispatch(fetchCharacterAction(characterId));
+      setCharacterId(() => {return characterId + 1})
     }
-    if (characters.length / starships.length <= 0.2) {
-      dispatch(fetchCharacterAction());
-    }
-  });
+  }, [dispatch, characterId, characters.length, starships.length]);
 
   useEffect(() => {
     dispatch(fetchStarshipsAction());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
+
+    function handleScroll() {
+      if (
+        document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.scrollHeight &&
+        starshipsNextPage
+      ) {
+        dispatch(fetchStarshipsAction());
+      }
+    }
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [dispatch, starshipsNextPage]);
 
-  function handleScroll() {
-    if (
-      document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.scrollHeight &&
-      starshipsNextPage
-    ) {
-      setLoadMore(true);
-      dispatch(fetchStarshipsAction());
-      setLoadMore(false);
-    }
-  }
+
 
   return (
     <div id="list-container">
@@ -69,21 +67,8 @@ const List = () => {
         <p>&nbsp;</p>
       )}
 
-      {loadMore && "Fetching more list items..."}
+      {loading && "Fetching more list items..."}
 
-      {/* {loading ? (
-        <p>Loading...</p>
-      ) : starshipsNextPage ? (
-        <button
-          onClick={() => {
-
-          }}
-        >
-          Fetch
-        </button>
-      ) : (
-        <p>No More Starships</p>
-      )} */}
     </div>
   );
 };

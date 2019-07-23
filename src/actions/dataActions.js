@@ -17,7 +17,9 @@ export const fetchStarshipsAction = () => {
       })
       .then(({ starships, next }) => {
         dispatch({ type: "FETCH_STARSHIPS", starships });
+        dispatch({ type: "LOADING" });
         dispatch({ type: "UPDATE_STARSHIP_PAGE", next });
+        dispatch({ type: "FINISHED_LOADING" });
       })
       .catch(err => {
         dispatch({ type: "FETCH_STARSHIPS_ERROR", err });
@@ -25,41 +27,9 @@ export const fetchStarshipsAction = () => {
   };
 };
 
-export const fetchCharacterCountAction = () => {
+export const fetchCharacterAction = (lastCharacterId) => {
   return (dispatch, getState) => {
-    fetch("https://swapi.co/api/people/")
-      .then(response => {
-        const characterCount = response.json().then(characters => {
-          return characters.count;
-        });
-        return characterCount;
-      })
-      .then(count => {
-        dispatch({ type: "FETCH_CHARACTER_COUNT", count });
-      })
-      .catch(err => {
-        dispatch({ type: "FETCH_CHARACTER_COUNT_ERROR", err });
-      });
-  };
-};
-
-export const fetchCharacterAction = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const characterCount = state.characterCount;
-    const characterIds = state.characterIds;
-
-    function getRandomId() {
-      let randomCharacterId = Math.floor(Math.random() * characterCount) + 1;
-      console.log(characterIds)
-      if (characterIds.includes(randomCharacterId)) {
-        getRandomId();
-        return
-      } else {
-        return randomCharacterId;
-      }
-    }
-    const characterId = getRandomId();
+    const characterId = lastCharacterId + 1;
 
     fetch(`https://swapi.co/api/people/${characterId}/`)
       .then(response => {
@@ -69,7 +39,7 @@ export const fetchCharacterAction = () => {
         return characterData;
       })
       .then(character => {
-        dispatch({ type: "FETCH_CHARACTER", character });
+        dispatch({ type: "FETCH_CHARACTER", character, characterId });
       })
       .catch(err => {
         dispatch({ type: "FETCH_CHARACTER_ERROR", err });
