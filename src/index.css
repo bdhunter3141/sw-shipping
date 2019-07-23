@@ -14,6 +14,10 @@ code {
 
 /* List Styling */
 
+#list-container {
+  height: 110vh;
+}
+
 .starship-list-item,
 .character-list-item {
   margin: 20px;

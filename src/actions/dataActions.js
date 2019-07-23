@@ -3,7 +3,6 @@ import uuid from "uuid/v1";
 export const fetchStarshipsAction = () => {
   return (dispatch, getState) => {
     const state = getState();
-    dispatch({ type: "LOADING" });
     fetch(state.starshipsNextPage)
       .then(response => {
         const starships = response.json().then(starships => {
@@ -19,11 +18,9 @@ export const fetchStarshipsAction = () => {
       .then(({ starships, next }) => {
         dispatch({ type: "FETCH_STARSHIPS", starships });
         dispatch({ type: "UPDATE_STARSHIP_PAGE", next });
-        dispatch({ type: "FINISHED_LOADING" });
       })
       .catch(err => {
         dispatch({ type: "FETCH_STARSHIPS_ERROR", err });
-        dispatch({ type: "FINISHED_LOADING" });
       });
   };
 };
@@ -50,12 +47,14 @@ export const fetchCharacterAction = () => {
   return (dispatch, getState) => {
     const state = getState();
     const characterCount = state.characterCount;
-    const characterIds = state.characters;
+    const characterIds = state.characterIds;
 
     function getRandomId() {
       let randomCharacterId = Math.floor(Math.random() * characterCount) + 1;
+      console.log(characterIds)
       if (characterIds.includes(randomCharacterId)) {
-        return getRandomId();
+        getRandomId();
+        return
       } else {
         return randomCharacterId;
       }

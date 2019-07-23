@@ -10,21 +10,15 @@ const initState = {
 
 const rootReducer = (state = initState, action) => {
   switch (action.type) {
-    case "LOADING":
-      return { ...state, loading: true };
-    case "FINISHED_LOADING":
-      return { ...state, loading: false };
     case "FETCH_STARSHIPS":
       return { ...state, starships: [...state.starships, ...action.starships] };
     case "FETCH_STARSHIPS_ERROR":
-      console.log("Fetching Starships was unsuccessful.", action.err);
       return state;
     case "UPDATE_STARSHIP_PAGE":
       return { ...state, starshipsNextPage: action.next };
     case "FETCH_CHARACTER_COUNT":
       return { ...state, characterCount: action.count };
     case "FETCH_CHARACTER_COUNT_ERROR":
-      console.log("Fetching character count was unsuccessful.", action.count);
       return state;
     case "FETCH_CHARACTER":
       return {
