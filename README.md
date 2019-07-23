@@ -1,6 +1,14 @@
 # SW Shipping
 
+This is a fictitious future shipping company website that uses data from the Star Wars API to populate a list of starships and pilots. It uses scrolling for pagination and loads a pilot profile after every eighth starship. Redux is used to handle the state of the application and only functional components and React "hooks" are used for lifecycle features.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+### Getting Started
+
+Fork and clone the repository. Install the dependencies and run 'npm start' to start the development server. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 
 ## Available Scripts
 
@@ -45,26 +53,15 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Dependencies
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    @testing-library/react
+    react
+    react-dom
+    react-redux
+    react-router-dom
+    react-scripts
+    redux
+    redux-thunk
+    uuid
