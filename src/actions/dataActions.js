@@ -1,5 +1,6 @@
 import uuid from "uuid/v1";
 
+// Fetch Starships
 export const fetchStarshipsAction = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -8,6 +9,7 @@ export const fetchStarshipsAction = () => {
       .then(response => {
         const starships = response.json().then(starships => {
           let starshipsList = [];
+          // Add an id to each starship
           starships.results.forEach(starship => {
             starship.id = uuid();
             starshipsList.push(starship);
@@ -28,6 +30,7 @@ export const fetchStarshipsAction = () => {
   };
 };
 
+// Fetch single Starship
 export const fetchStarshipAction = (id) => {
   return (dispatch, getState) => {
     dispatch({ type: "LOADING" });
@@ -45,6 +48,7 @@ export const fetchStarshipAction = (id) => {
   };
 };
 
+// Fetch character
 export const fetchCharacterAction = (lastCharacterId) => {
   return (dispatch, getState) => {
     const characterId = lastCharacterId + 1;

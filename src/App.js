@@ -8,7 +8,6 @@ const App = () => {
   return (
     <div className="App container">
       <Router>
-
         <Link to="/">
           <h1 className="grey-text text-darken-2"><strong><i className="fab fa-old-republic"></i> SW SHIPPING</strong></h1>
         </Link>

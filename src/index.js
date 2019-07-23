@@ -8,12 +8,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 
-// Note: this API requires redux@>=3.1.0
+// Create Redux Store and apply Thunk Middleware
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
+// Wrap App with Redux Store Provider
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
