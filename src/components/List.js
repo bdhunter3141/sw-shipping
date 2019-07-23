@@ -52,8 +52,8 @@ const List = () => {
 
   return (
     <div id="list-container">
-      <div className="collection">
-        <div className="collection-header"><h4 className="light-blue-text text-darken-3">Our Fleet</h4></div>
+      <div className="collection" data-testid="fleet-collection">
+        <div className="collection-header"><h4 data-testid="fleet-h4" className="light-blue-text text-darken-3">Our Fleet</h4></div>
 
         {/* Map Starships and Characters */}
         {starships.length ? (

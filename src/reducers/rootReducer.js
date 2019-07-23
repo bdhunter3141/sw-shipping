@@ -1,5 +1,5 @@
 // Initial State
-const initState = {
+export const initState = {
   loading: true,
   starships: [],
   starshipsNextPage: "https://swapi.co/api/starships/?page=1",
@@ -10,7 +10,7 @@ const initState = {
 };
 
 // Reducer
-const rootReducer = (state = initState, action) => {
+export const rootReducer = (state = initState, action) => {
   switch (action.type) {
     case "FETCH_STARSHIPS":
       // Add Starships to array of starships in store
