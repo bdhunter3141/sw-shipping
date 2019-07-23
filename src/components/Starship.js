@@ -8,20 +8,20 @@ import {
 const starshipInfo = (starship) => {
   return (
     <div>
-      <h2>Stats for the {starship.name}</h2>
-      <ul>
-        <li>Manufacturer: {starship.manufacturer}</li>
-        <li>Model: {starship.model}</li>
-        <li>Starship Class: {starship.starship_class}</li>
-        <li>Megalights: {starship.MGLT}/hr</li>
-        <li>Cargo Capacity: {starship.cargo_capacity} kg</li>
-        <li>Consumables: {starship.consumables} before resupply</li>
-        <li>Cost: {starship.cost_in_credits} credits</li>
-        <li>Crew: {starship.crew} people needed</li>
-        <li>Hyperdrive Rating: {starship.hyperdrive_rating}</li>
-        <li>Length: {starship.length} meters</li>
-        <li>Max Atmosphering Speed: {starship.max_atmosphering_speed}</li>
-        <li>Passengers: Holds {starship.passengers} people</li>
+      <ul className="collection starship-stats">
+        <li className="collection-header"><h4 className="grey-text text-lighten-1">Statistics</h4></li>
+        <li className="collection-item"><i className="grey-text text-darken-2 fas fa-tools"></i> <span className="stat-descriptor grey-text text-darken-2">Manufacturer:</span> {starship.manufacturer}</li>
+        <li className="collection-item"><i className="grey-text text-darken-2 fas fa-rocket"></i> <span className="stat-descriptor grey-text text-darken-2">Model:</span> {starship.model}</li>
+      <li className="collection-item"><i className="grey-text text-darken-2 fas fa-filter"></i> <span className="stat-descriptor grey-text text-darken-2">Starship Class:</span> {starship.starship_class}</li>
+    <li className="collection-item"><i className="grey-text text-darken-2 fas fa-meteor"></i> <span className="stat-descriptor grey-text text-darken-2">Megalights:</span> {starship.MGLT}/hr</li>
+      <li className="collection-item"><i className="grey-text text-darken-2 fas fa-boxes"></i> <span className="stat-descriptor grey-text text-darken-2">Cargo Capacity:</span> {starship.cargo_capacity} kg</li>
+        <li className="collection-item"><i className="grey-text text-darken-2 fas fa-truck-loading"></i> <span className="stat-descriptor grey-text text-darken-2">Consumables:</span> {starship.consumables} before resupply</li>
+          <li className="collection-item"><i className="grey-text text-darken-2 fas fa-dollar-sign"></i> <span className="stat-descriptor grey-text text-darken-2">Cost:</span> {starship.cost_in_credits} credits</li>
+            <li className="collection-item"><i className="grey-text text-darken-2 fas fa-people-carry"></i> <span className="stat-descriptor grey-text text-darken-2">Crew:</span> {starship.crew} people needed</li>
+              <li className="collection-item"><i className="grey-text text-darken-2 fas fa-star"></i> <span className="stat-descriptor grey-text text-darken-2">Hyperdrive Rating:</span> {starship.hyperdrive_rating}</li>
+                <li className="collection-item"><i className="grey-text text-darken-2 fas fa-ruler"></i> <span className="stat-descriptor grey-text text-darken-2">Length:</span> {starship.length} meters</li>
+                  <li className="collection-item"><i className="grey-text text-darken-2 fas fa-tachometer-alt"></i> <span className="stat-descriptor grey-text text-darken-2">Max Atmosphering Speed:</span> {starship.max_atmosphering_speed}</li>
+                    <li className="collection-item"><i className="grey-text text-darken-2 fas fa-users"></i> <span className="stat-descriptor grey-text text-darken-2">Passengers:</span> Holds {starship.passengers} people</li>
       </ul>
     </div>
   )
@@ -39,8 +39,8 @@ const Starship = (props) => {
 
   return (
     <div>
-      <Link to="/">Return Home</Link>
-      <h1>Starship Profile: {starship ? starship.name : ''}</h1>
+      <Link to="/"><i className="fas fa-arrow-left"></i> Return</Link>
+      <h3 className="light-blue-text text-darken-3"><strong>Starship Profile:</strong> {starship.name ? `The ${starship.name}` : ''}</h3>
 
       {Object.entries(starship).length !== 0 && starship.constructor === Object ? starshipInfo(starship) : <div>&nbsp;</div>}
 
